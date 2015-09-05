@@ -1,0 +1,28 @@
+en:
+  surveys:
+    index:
+      title: Surveys
+      empty_collection: No surveys found.
+    new:
+      title: New Survey
+    edit:
+      title: Edit Survey
+    save:
+      failed: Something went wrong at saving survey
+      successful: Successfully saved survey.
+        
+    create:
+      title: Create Survey
+    
+    update:
+      title: Update Survey
+    destroy:
+      confirmation: Do you really want to remove this survey?
+        
+  activerecord:
+    errors:
+      models:
+        survey:
+          attributes:
+            base: 
+              deletion_failed: Survey could not be deleted!

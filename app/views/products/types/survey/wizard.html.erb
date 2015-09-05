@@ -1,0 +1,14 @@
+<div id="outlet">
+</div>
+    
+<% content_for :javascript_includes do %>
+  <script type="text/javascript">
+  Volontariat = typeof Volontariat === 'undefined' ? {} : Volontariat;
+  Volontariat.Survey = typeof Volontariat.Survey === 'undefined' ? {} : Volontariat.Survey;
+  Volontariat.Survey.NewRecord = <%= @story.new_record? %>;
+  Volontariat.Survey.ProjectId = '<%= @project.id %>';
+  Volontariat.Survey.StoryId = '<%= @story.id %>';
+  </script>
+  <%= javascript_include_tag 'voluntary_survey/story/application' %>
+  <%= render partial: 'layouts/voluntary/translations_javascript' %>
+<% end %>
