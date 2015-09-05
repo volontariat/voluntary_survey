@@ -1,4 +1,6 @@
-require "voluntary_survey/engine"
+require 'voluntary'
+
+require 'voluntary_survey/engine'
 
 module VoluntarySurvey
 end
