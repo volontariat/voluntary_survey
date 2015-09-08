@@ -17,3 +17,18 @@
   <input type="submit" name="commit" value="{{t 'stories.update.title' true }}" class="btn btn-default" {{action 'saveStory'}}/>
 {{/if}}
 </form>
+
+{{#if newRecord}}
+{{else}}
+  {{#each model.pages as |page pageIndex|}}
+    {{page-form selectedId=pageId id=page.id.$oid position=pageIndex name=page.name text=page.text tasks=page.tasks editAction='editPage' reloadAction='reload'}}
+  {{/each}}
+  
+  {{#if newPage}}
+    {{page-form position=model.pages.length editAction='editPage' reloadAction='reload'}}
+  {{else}}
+    <button {{action 'addNewPage'}} style="margin-top:15px;">
+      <span class="glyphicon glyphicon-plus"></span> {{t 'survey_pages.new.title' }}
+    </button>
+  {{/if}}
+{{/if}}

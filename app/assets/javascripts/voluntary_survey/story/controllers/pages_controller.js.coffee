@@ -12,8 +12,11 @@ Volontariat.Survey.StoryApp.PagesController = Ember.Controller.extend
         if data.errors
           Volontariat.alert 'danger', "#{Volontariat.t('stories.save.failed')}: #{JSON.stringify(data.errors)}"
         else
-          Volontariat.Survey.NewRecord = false
-          @set 'newRecord', false
+          if Volontariat.Survey.NewRecord
+            @set 'newPage', true
+            Volontariat.Survey.NewRecord = false
+            @set 'newRecord', false
+          
           Volontariat.Survey.StoryId = data.id
           @transitionToRoute 'no_data'
           @transitionToRoute 'pages'
@@ -21,3 +24,15 @@ Volontariat.Survey.StoryApp.PagesController = Ember.Controller.extend
       ).fail((data) =>
         Volontariat.alert 'danger', "#{Volontariat.t('stories.save.failed')}!"
       )
+      
+    addNewPage: ->
+      @set 'newPage', true
+      @set 'pageId', null
+      
+    editPage: (id) ->
+      @set 'newPage', false
+      @set 'pageId', id
+      
+    reload: ->
+      @transitionToRoute 'no_data'
+      @transitionToRoute 'pages'

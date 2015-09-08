@@ -2,6 +2,7 @@ class Product::Survey::Page
   include Mongoid::Document
   include Mongoid::Timestamps
   include ActiveModel::MassAssignmentSecurity
+  include Mongoid::Orderable
   
   embedded_in :story, class_name: 'Product::Survey::Story', inverse_of: :pages
   embeds_many :tasks, class_name: 'Product::Survey::Task', inverse_of: :page
@@ -9,7 +10,9 @@ class Product::Survey::Page
   field :name, type: String
   field :text, type: String
   
-  attr_accessible :story_id, :name, :text
+  orderable
+  
+  attr_accessible :story_id, :position, :name, :text
   
   protected
   

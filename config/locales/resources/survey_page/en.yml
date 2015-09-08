@@ -1,0 +1,35 @@
+en:
+  survey_pages:
+    index:
+      title: Pages
+      empty_collection: No pages found.
+    new:
+      title: New Page
+    edit:
+      title: Edit Page
+    save:
+      failed: Something went wrong at saving page
+      successful: Successfully saved page.
+        
+    create:
+      title: Create Page
+    show:
+      untitled_page: Untitled Page
+      page_without_text: Put your page description here!
+    update:
+      title: Update Page
+    destroy:
+      title: Remove Page
+      confirmation: Do you really want to remove this page?
+        
+  activerecord:
+    models:
+      survey_page: Survey Page
+      survey_page_short: Page
+      
+    errors:
+      models:
+        survey_page:
+          attributes:
+            base: 
+              deletion_failed: Page could not be deleted!

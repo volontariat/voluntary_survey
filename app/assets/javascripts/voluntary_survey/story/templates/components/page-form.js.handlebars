@@ -1,0 +1,42 @@
+{{#if deleted}}
+{{else}}
+  {{#if editMode}}
+<fieldset class="fieldset" style="border: 1px solid black; padding:15px; margin-top:15px;">
+  <legend>
+    {{t 'activerecord.models.survey_page_short'}} {{computedPosition}}
+  </legend>
+  <form class="simple_form form-vertical" novalidate="novalidate" action="/" accept-charset="UTF-8" method="post">
+    <div class="form-group string required page_name">
+      <label class="string required control-label control-label" for="page_name">
+        {{t 'attributes.name'}}
+      </label>
+      {{input value=name class="string required form-control" type="text" name="page[name]" id="page_name"}}
+    </div>  
+    <div class="form-group text required page_text">
+      <label class="text required control-label control-label" for="page_text">
+        {{t 'attributes.text'}}
+      </label>
+      {{textarea value=text style="width: 500px; height:300px;" class="text required form-control" name="page[text]" id="page_text"}}
+    </div>
+    
+    <input type="submit" name="commit" value="{{t 'general.cancel' true }}" class="btn btn-default" {{action 'cancel'}}/>
+    
+  {{#if id}}
+    <input type="submit" name="commit" value="{{t 'survey_pages.update.title' true }}" class="btn btn-default" {{action 'save'}}/>
+    <input type="submit" name="commit" value="{{t 'survey_pages.destroy.title' true }}" class="btn btn-default" {{action 'destroy'}}/>
+  {{else}}
+    <input type="submit" name="commit" value="{{t 'survey_pages.create.title' true }}" class="btn btn-default" {{action 'save'}}/>
+  {{/if}}
+  </form>
+</fieldset>
+  {{else}}
+<h2>{{computedName}}</h2>
+<p>{{computedText}}</p>
+<a {{action 'enterEditMode'}}>
+  <span class="glyphicon glyphicon-pencil"></span> {{t 'general.edit'}}
+</a>
+<a {{action 'destroy'}}>
+  <span class="glyphicon glyphicon-remove"></span> {{t 'general.destroy'}}
+</a>
+  {{/if}}
+{{/if}}

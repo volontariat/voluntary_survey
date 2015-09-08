@@ -2,6 +2,6 @@ class SurveyStorySerializer < StorySerializer
   attributes :pages
   
   def pages
-    object.pages.map{|a| SurveyPageSerializer.new(a)}
+    object.pages.order_by(position: 'asc').map{|a| SurveyPageSerializer.new(a)}
   end
 end

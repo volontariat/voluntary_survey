@@ -3,10 +3,15 @@ Volontariat.Survey.StoryApp.PagesRoute = Ember.Route.extend
     @controllerFor('pages').set 'newRecord', Volontariat.Survey.NewRecord
     
     if Volontariat.Survey.NewRecord
-      []
+      {}
     else
       Ember.$.getJSON("/api/v1/stories/#{Volontariat.Survey.StoryId}").then (json) =>
-        @controllerFor('pages').set 'name', json.name
-        @controllerFor('pages').set 'text', json.text
+        @controllerFor('pages').set 'name', json.survey_story.name
+        @controllerFor('pages').set 'text', json.survey_story.text
+
+        @controllerFor('pages').set 'newPage', true if json.survey_story.pages.length == 0
         
-      @store.query 'survey_page', story_id: Volontariat.Survey.StoryId
+        json.survey_story.pages = $.map json.survey_story.pages, (page, i) ->
+          page.survey_page
+          
+        json.survey_story
