@@ -17,7 +17,7 @@ Volontariat.Survey.StoryApp.PagesController = Ember.Controller.extend
             Volontariat.Survey.NewRecord = false
             @set 'newRecord', false
           
-          Volontariat.Survey.StoryId = data.id
+          Volontariat.Survey.StoryId = data.survey_story.id.$oid
           @transitionToRoute 'no_data'
           @transitionToRoute 'pages'
           Volontariat.alert 'success', Volontariat.t('stories.save.successful')

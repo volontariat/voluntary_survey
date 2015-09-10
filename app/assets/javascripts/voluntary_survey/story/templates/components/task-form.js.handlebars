@@ -1,0 +1,91 @@
+{{#if deleted}}
+{{else}}
+  {{#if editMode}}
+<form class="simple_form form-horizontal" novalidate="novalidate" accept-charset="UTF-8" style="margin-top:15px;">
+  <div class="form-group string required task_name">
+    <label class="string required control-label col-sm-3 control-label" for="task_name">
+      <abbr title="required">*</abbr> {{t 'activerecord.attributes.survey_task.name'}}
+    </label>
+    <div class="col-sm-9">
+      {{input value=name class="string required form-control" type="text" name="task[name]" id="task_name"}}
+    </div>
+  </div>
+  <div class="form-group string optional task_text">
+    <label class="string optional control-label col-sm-3 control-label" for="task_text">
+      {{t 'attributes.text'}}
+    </label>
+    <div class="col-sm-9">
+      {{textarea value=text class="string optional form-control" type="text" name="task[text]" id="task_text"}}
+    </div>
+  </div>
+  <div class="form-group string optional task_text">
+    <label class="string optional control-label col-sm-3 control-label" for="task_text">
+      <abbr title="required">*</abbr> {{t 'activerecord.attributes.survey_task.answer_type'}}
+    </label>
+    <div class="col-sm-9">
+      <select {{action 'changeAnswerType' on='change'}} id="task_answer_type">
+    {{#each answerTypes key="@index" as |item|}}
+        <option value="{{item}}" selected={{is-equal item answerType}}>
+          {{item}}
+        </option>
+    {{/each}}
+      </select>
+    </div>
+  </div>
+  
+  <div class="form-group">
+    <div class="col-sm-offset-3 col-sm-9">
+      <input type="submit" name="commit" value="{{t 'general.cancel' true }}" class="btn btn-default" {{action 'cancel'}}/>
+      
+    {{#if id}}
+      <input type="submit" name="commit" value="{{t 'survey_tasks.update.title' true }}" class="btn btn-default" {{action 'save'}}/>
+      <input type="submit" name="commit" value="{{t 'survey_tasks.destroy.title' true }}" class="btn btn-default" {{action 'destroy'}}/>
+    {{else}}
+    <input type="submit" name="commit" value="{{t 'survey_tasks.create.title' true }}" class="btn btn-default" {{action 'save'}}/>
+    {{/if}}
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="col-sm-12">
+    {{#if shortTextAnswer}}
+      <input type="text" class="string required form-control"/> 
+    {{/if}}
+    {{#if longTextAnswer}}
+      <textarea class="string required form-control"/>
+    {{/if}}
+    </div>
+  </div>
+</form>
+  {{else}}
+<form class="simple_form form-vertical" novalidate="novalidate" action="/" accept-charset="UTF-8" method="post">
+  <div class="form-group string required page_name">
+    <label class="string required control-label control-label">
+      {{name}}
+    </label>
+    {{#if text}}
+    <p>
+      {{text}}
+    </p>
+    {{/if}}
+    
+    <p>
+    {{#if shortTextAnswer}}
+      <input type="text"/> 
+    {{/if}}
+    {{#if longTextAnswer}}
+      <textarea/>
+    {{/if}}
+    </p>
+    
+    <p>
+      <a {{action 'enterEditMode'}}>
+        <span class="glyphicon glyphicon-pencil"></span> {{t 'general.edit'}}
+      </a>
+      <a {{action 'destroy'}}>
+        <span class="glyphicon glyphicon-remove"></span> {{t 'general.destroy'}}
+      </a>
+    </p>
+  </div> 
+</form>     
+  {{/if}}
+{{/if}}

@@ -38,3 +38,17 @@ Volontariat.Survey.StoryApp.PageFormComponent = Ember.Component.extend
         ).fail((data) ->
           alert Volontariat.t('activerecord.errors.models.survey_page.attributes.base.deletion_failed')
         ) 
+    
+    reload: ->
+      @sendAction 'reloadAction'
+      
+    editPage: (id) ->
+      @sendAction 'editAction', id
+        
+    addNewTask: ->
+      @set 'newTask', true
+      @set 'taskId', null
+      
+    editTask: (id) ->
+      @set 'newTask', false
+      @set 'taskId', id

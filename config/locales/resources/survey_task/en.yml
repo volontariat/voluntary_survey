@@ -1,0 +1,37 @@
+en:
+  survey_tasks:
+    index:
+      title: Tasks
+      empty_collection: No tasks found.
+    new:
+      title: New Task
+    edit:
+      title: Edit Task
+    save:
+      failed: Something went wrong at saving task
+      successful: Successfully saved task.
+        
+    create:
+      title: Create Task
+    update:
+      title: Update Task
+    destroy:
+      title: Remove Task
+      confirmation: Do you really want to remove this task?
+        
+  activerecord:
+    models:
+      survey_task: Survey Task
+      survey_task_short: Task
+ 
+    attributes:
+      survey_task: 
+        name: Question
+        answer_type: Answer type
+        
+    errors:
+      models:
+        survey_task:
+          attributes:
+            base: 
+              deletion_failed: Task could not be deleted!

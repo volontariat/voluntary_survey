@@ -6,28 +6,43 @@
     {{t 'activerecord.models.survey_page_short'}} {{computedPosition}}
   </legend>
   <form class="simple_form form-vertical" novalidate="novalidate" action="/" accept-charset="UTF-8" method="post">
-    <div class="form-group string required page_name">
-      <label class="string required control-label control-label" for="page_name">
+    <div class="form-group string optional page_name">
+      <label class="string optional control-label control-label" for="page_name">
         {{t 'attributes.name'}}
       </label>
-      {{input value=name class="string required form-control" type="text" name="page[name]" id="page_name"}}
+      {{input value=name class="string optional form-control" type="text" name="page[name]" id="page_name"}}
     </div>  
-    <div class="form-group text required page_text">
-      <label class="text required control-label control-label" for="page_text">
+    <div class="form-group text optional page_text">
+      <label class="text optional control-label control-label" for="page_text">
         {{t 'attributes.text'}}
       </label>
-      {{textarea value=text style="width: 500px; height:300px;" class="text required form-control" name="page[text]" id="page_text"}}
+      {{textarea value=text style="width: 500px; height:300px;" class="text optional form-control" name="page[text]" id="page_text"}}
     </div>
     
-    <input type="submit" name="commit" value="{{t 'general.cancel' true }}" class="btn btn-default" {{action 'cancel'}}/>
+    <p style="margin-bottom:15px;">
+      <input type="submit" name="commit" value="{{t 'general.cancel' true }}" class="btn btn-default" {{action 'cancel'}}/>
     
-  {{#if id}}
-    <input type="submit" name="commit" value="{{t 'survey_pages.update.title' true }}" class="btn btn-default" {{action 'save'}}/>
-    <input type="submit" name="commit" value="{{t 'survey_pages.destroy.title' true }}" class="btn btn-default" {{action 'destroy'}}/>
-  {{else}}
-    <input type="submit" name="commit" value="{{t 'survey_pages.create.title' true }}" class="btn btn-default" {{action 'save'}}/>
-  {{/if}}
+    {{#if id}}
+      <input type="submit" name="commit" value="{{t 'survey_pages.update.title' true }}" class="btn btn-default" {{action 'save'}}/>
+      <input type="submit" name="commit" value="{{t 'survey_pages.destroy.title' true }}" class="btn btn-default" {{action 'destroy'}}/>
+    {{else}}
+      <input type="submit" name="commit" value="{{t 'survey_pages.create.title' true }}" class="btn btn-default" {{action 'save'}}/>
+    {{/if}}
+    </p>
   </form>
+    {{#if id}}
+      {{#each tasks as |task taskIndex|}}
+        {{task-form pageId=id selectedId=taskId id=task.id.$oid position=taskIndex name=task.name text=task.text answerType=task.answer_type editAction='editTask' editPageAction='editPage' reloadAction='reload'}}
+      {{/each}}
+      
+      {{#if newTask}}
+        {{task-form pageId=id position=tasks.length answerType='Short text' editAction='editTask' editPageAction='editPage' reloadAction='reload'}}
+      {{else}}
+        <button {{action 'addNewTask'}} style="margin-top:15px;">
+          <span class="glyphicon glyphicon-plus"></span> {{t 'survey_tasks.new.title' }}
+        </button>
+      {{/if}}
+    {{/if}}
 </fieldset>
   {{else}}
 <h2>{{computedName}}</h2>
