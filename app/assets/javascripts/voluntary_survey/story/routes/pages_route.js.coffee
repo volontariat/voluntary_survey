@@ -1,6 +1,7 @@
 Volontariat.Survey.StoryApp.PagesRoute = Ember.Route.extend
   model: (params) ->
     @controllerFor('pages').set 'newRecord', Volontariat.Survey.NewRecord
+    @controllerFor('pages').set 'storyState', Volontariat.Survey.StoryState
     
     if Volontariat.Survey.NewRecord
       {}

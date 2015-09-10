@@ -11,11 +11,18 @@
     </label>
     {{textarea value=text style="width: 500px; height:300px;" class="text required form-control" name="story[text]" id="story_text"}}
   </div>
+  <p>
 {{#if newRecord}}
-  <input type="submit" name="commit" value="{{t 'stories.create.title' true }}" class="btn btn-default" {{action 'saveStory'}}/>
+    <input type="submit" name="commit" value="{{t 'stories.create.title' true }}" class="btn btn-default" {{action 'saveStory'}}/>
 {{else}}
-  <input type="submit" name="commit" value="{{t 'stories.update.title' true }}" class="btn btn-default" {{action 'saveStory'}}/>
+    <input type="submit" name="commit" value="{{t 'stories.update.title' true }}" class="btn btn-default" {{action 'saveStory'}}/>
+  {{#if canActivateStory}}
+    <input type="submit" name="commit" value="{{t 'stories.steps.activate.title' true }}" class="btn btn-default" {{action 'triggerStoryEvent' 'activate'}}/>
+  {{else}}
+    <input type="submit" name="commit" value="{{t 'stories.steps.deactivate.title' true }}" class="btn btn-default" {{action 'triggerStoryEvent' 'deactivate'}}/>
+  {{/if}}
 {{/if}}
+  </p>
 </form>
 
 {{#if newRecord}}

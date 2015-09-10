@@ -8,6 +8,7 @@
   Volontariat.Survey.NewRecord = <%= @story.new_record? %>;
   Volontariat.Survey.ProjectId = '<%= @project.id %>';
   Volontariat.Survey.StoryId = '<%= @story.id %>';
+  Volontariat.Survey.StoryState = '<%= @story.state %>';
   </script>
   <%= javascript_include_tag 'voluntary_survey/story/application' %>
   <%= render partial: 'layouts/voluntary/translations_javascript' %>
