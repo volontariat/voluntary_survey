@@ -6,10 +6,6 @@ class Voluntary::Api::V1::SurveyPagesController < ActionController::Base
   def show
     resource = Product::Survey::Page.find(params[:story_id]).pages.find(params[:id])
     
-    if current_user
-      resource.positive = Product::Survey::Page.likes_or_dislikes_for(current_user, [resource.id])[resource.id].try(:positive)
-    end
-      
     respond_to do |format|
       format.json do
         render json: resource
@@ -20,7 +16,7 @@ class Voluntary::Api::V1::SurveyPagesController < ActionController::Base
   def create
     story = Product::Survey::Story.find(params[:survey_page].delete(:story_id))
     
-    authorize! :create, story
+    authorize! :update, story
     
     resource = story.pages.create params[:survey_page]
     
