@@ -16,8 +16,16 @@ en:
     
     update:
       title: Update Survey
+      
+    complete:
+      success_message: Thanks for participating in the survey!  
+      
     destroy:
       confirmation: Do you really want to remove this survey?
+        
+    workflow:
+      user:
+        take_survey: Take survey!
         
   activerecord:
     errors:

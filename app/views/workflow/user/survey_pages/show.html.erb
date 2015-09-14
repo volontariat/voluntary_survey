@@ -1,0 +1,47 @@
+<h2><%= @story.name %></h2>
+
+<% if @page.name.present? %>
+<h3><%= @page.name %></h3>
+<% else %>
+<h3><%= t('activerecord.models.survey_page_short') %> <%= @page.position %></h3>
+<% end %>
+
+<% if @page.text.present? %>
+<p>
+  <%= @page.text %>
+</p>
+<% end %>
+
+<%= form_tag survey_page_workflow_user_index_path(story_id: @story.slug, page_position: params[:page_position]), method: :put, class: 'form-vertical' do %>
+  <% @page.tasks.each do |task| %>
+    <% result = @results[task.id] %>
+    
+    <%= hidden_field_tag "results[#{task.id}][id]", result.id if result %>
+    
+    <div class="form-group string required page_name <%= (@errors[task.id] ? 'has-error' : '') %>">
+      <label class="string required control-label control-label">
+        <%= task.name %>
+      </label>
+    <% if task.text.present? %>
+      <p>
+        <%= task.text %>
+      </p>
+    <% end %>
+      
+      <p>
+    <% if task.answer_type == 'Short text' %>
+        <%= text_field_tag "results[#{task.id}][text]", result.try(:text), class: 'required form-control' %>
+    <% elsif task.answer_type == 'Long text' %>
+        <%= text_area_tag "results[#{task.id}][text]", result.try(:text), class: 'required form-control' %>
+    <% end %>
+      </p>
+      
+    <% if @errors[task.id] %>
+      <% @errors[task.id].each do |message| %>
+        <span class="help-block"><%= message %></span>
+      <% end %>
+    <% end %>  
+  <% end %>
+
+  <%= submit_tag t('general.submit'), class: 'btn btn-default' %>
+<% end %>
