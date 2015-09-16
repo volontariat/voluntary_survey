@@ -14,7 +14,12 @@ Volontariat.Survey.StoryApp.PagesRoute = Ember.Route.extend
         
         json.survey_story.pages = $.map json.survey_story.pages, (page, i) ->
           page.survey_page.tasks = $.map page.survey_page.tasks, (task, j) ->
-            task.survey_task
+            task = task.survey_task
+            
+            task.options = $.map task.options, (option, k) ->
+              option.survey_input_option
+              
+            task
             
           page.survey_page
           

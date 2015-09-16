@@ -1,0 +1,19 @@
+{{#if deleted}}
+{{else}}
+<form class="form-inline" style="margin-left:15px;">
+  <div class="form-group string optional input_option_key">
+    {{input value=key class="string optional form-control" type="text" name="survey_input_option[key]" id=keyInputId placeholder=keyPlaceholder}}
+  </div>
+  <div class="form-group string required input_option_value">
+    {{input value=value class="string required form-control" type="text" name="survey_input_option[value]" id=valueInputId placeholder=valuePlaceholder}}
+  </div>
+  <div class="form-group">
+  {{#if id}}
+    <input type="submit" name="commit" value="{{t 'survey_input_options.update.title' true }}" class="btn btn-default" {{action 'save'}}/>
+    <input type="submit" name="commit" value="{{t 'survey_input_options.destroy.title' true }}" class="btn btn-default" {{action 'destroy'}}/>
+  {{else}}
+    <input type="submit" name="commit" value="{{t 'survey_input_options.create.title' true }}" class="btn btn-default" {{action 'save'}}/>
+  {{/if}}
+  </div>
+</form>
+{{/if}}

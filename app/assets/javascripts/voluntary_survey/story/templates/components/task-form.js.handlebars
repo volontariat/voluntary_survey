@@ -33,6 +33,20 @@
     </div>
   </div>
   
+    {{#if id}}
+      {{#if answerWithOptions}}
+  <div class="form-group">
+    <div class="col-sm-offset-3 col-sm-9">
+      {{#each options as |option optionIndex|}}
+        {{task-option-form pageId=pageId taskId=id id=option.id.$oid position=optionIndex key=option.key value=option.value editTaskAction='editTask' editPageAction='editPage' reloadAction='reload'}}
+      {{/each}}
+      
+      {{task-option-form pageId=pageId taskId=id position=options.length addOptionAction='addOption' editTaskAction='editTask' editPageAction='editPage' reloadAction='reload'}}
+    </div>
+  </div>
+      {{/if}}
+    {{/if}}
+  
   <div class="form-group">
     <div class="col-sm-offset-3 col-sm-9">
       <input type="submit" name="commit" value="{{t 'general.cancel' true }}" class="btn btn-default" {{action 'cancel'}}/>
@@ -72,8 +86,29 @@
     {{#if shortTextAnswer}}
       <input type="text"/> 
     {{/if}}
+    
     {{#if longTextAnswer}}
       <textarea/>
+    {{/if}}
+    
+    {{#if multipleChoiceAnswer}}
+      {{#each options as |option|}}
+        <input type="radio"/> {{option.value}}<br/>
+      {{/each}}
+    {{/if}}
+    
+    {{#if checkboxesAnswer}}
+      {{#each options as |option|}}
+        <input type="checkbox"/> {{option.value}}<br/>
+      {{/each}}
+    {{/if}}
+    
+    {{#if dropDownAnswer}}
+      <select>
+      {{#each options as |option|}}
+        <option>{{option.value}}</option>
+      {{/each}}
+      </select>
     {{/if}}
     </p>
     

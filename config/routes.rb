@@ -12,6 +12,7 @@ Rails.application.routes.draw do
     namespace :v1 do
       resources :survey_pages, only: [:create, :show, :update, :destroy]
       resources :survey_tasks, only: [:create, :show, :update, :destroy]
+      resources :survey_input_options, only: [:create, :show, :update, :destroy]
     end
   end
 end

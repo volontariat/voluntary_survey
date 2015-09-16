@@ -1,9 +1,13 @@
 Volontariat.Survey.StoryApp.TaskFormComponent = Ember.Component.extend
   computedPosition: (-> @get('position') + 1).property('position')
   editMode: (-> @get('selectedId') == @get('id')).property('selectedId', 'id')
-  answerTypes: ['Short text', 'Long text']
+  answerTypes: ['Multiple choice', 'Checkboxes', 'Drop-down list', 'Short text', 'Long text']
   shortTextAnswer: (-> @get('answerType') == 'Short text').property('answerType')
   longTextAnswer: (-> @get('answerType') == 'Long text').property('answerType')
+  answerWithOptions: (-> @get('answerType') == 'Multiple choice' || @get('answerType') == 'Checkboxes' || @get('answerType') == 'Drop-down list').property('answerType')
+  multipleChoiceAnswer: (-> @get('answerType') == 'Multiple choice').property('answerType')
+  checkboxesAnswer: (-> @get('answerType') == 'Checkboxes').property('answerType')
+  dropDownAnswer: (-> @get('answerType') == 'Drop-down list').property('answerType')
   
   actions:
     
@@ -16,6 +20,11 @@ Volontariat.Survey.StoryApp.TaskFormComponent = Ember.Component.extend
     changeAnswerType: ->
       @set 'answerType', $('#task_answer_type').val()
     
+    addOption: (option) ->
+      options = @get('options')
+      options.pushObject option
+      @set 'options', options
+
     save: ->
       $.ajax(
         type: if @get('id') then 'PUT' else 'POST'

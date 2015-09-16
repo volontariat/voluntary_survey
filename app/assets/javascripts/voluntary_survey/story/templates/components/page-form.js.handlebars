@@ -32,11 +32,11 @@
   </form>
     {{#if id}}
       {{#each tasks as |task taskIndex|}}
-        {{task-form pageId=id selectedId=taskId id=task.id.$oid position=taskIndex name=task.name text=task.text answerType=task.answer_type editAction='editTask' editPageAction='editPage' reloadAction='reload'}}
+        {{task-form pageId=id selectedId=taskId id=task.id.$oid position=taskIndex name=task.name text=task.text answerType=task.answer_type options=task.options editAction='editTask' editPageAction='editPage' reloadAction='reload'}}
       {{/each}}
       
       {{#if newTask}}
-        {{task-form pageId=id position=tasks.length answerType='Short text' editAction='editTask' editPageAction='editPage' reloadAction='reload'}}
+        {{task-form pageId=id position=tasks.length answerType='Short text' options=[] editAction='editTask' editPageAction='editPage' reloadAction='reload'}}
       {{else}}
         <button {{action 'addNewTask'}} style="margin-top:15px;">
           <span class="glyphicon glyphicon-plus"></span> {{t 'survey_tasks.new.title' }}

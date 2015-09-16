@@ -1,0 +1,37 @@
+en:
+  survey_input_options:
+    index:
+      title: Input options
+      empty_collection: No input options found.
+    new:
+      title: New Option
+    edit:
+      title: Edit Option
+    save:
+      failed: Something went wrong at saving input option
+      successful: Successfully saved input option.
+        
+    create:
+      title: Create Option
+    update:
+      title: Update Option
+    destroy:
+      title: Remove Option
+      confirmation: Do you really want to remove this input option?
+        
+  activerecord:
+    models:
+      survey_input_option: Survey Input Option
+      survey_input_option_short: Option
+ 
+    attributes:
+      survey_input_option: 
+        key: Key
+        value: Value
+        
+    errors:
+      models:
+        survey_input_option:
+          attributes:
+            base: 
+              deletion_failed: Input option could not be deleted!
