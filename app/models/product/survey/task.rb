@@ -3,7 +3,7 @@ class Product::Survey::Task < ::Task
   
   belongs_to :page, class_name: 'Product::Survey::Page', inverse_of: :tasks
   
-  embeds_many :options, class_name: 'Product::Survey::InputOption', inverse_of: :input
+  embeds_many :options, class_name: 'Product::Survey::InputOption', inverse_of: :task
   has_many :results, class_name: 'Product::Survey::Result', foreign_key: 'task_id', dependent: :destroy
   
   field :answer_type, type: String
