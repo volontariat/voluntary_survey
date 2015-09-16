@@ -4,7 +4,7 @@ class Voluntary::Api::V1::SurveyTasksController < ActionController::Base
   respond_to :json
   
   def show
-    resource = Product::Survey::Page.find(params[:story_id]).pages.find(params[:page_id]).tasks.find(params[:id])
+    resource = Product::Survey::Story.find(params[:story_id]).pages.find(params[:page_id]).tasks.find(params[:id])
       
     respond_to do |format|
       format.json do
