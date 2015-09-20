@@ -14,11 +14,11 @@
 
 <%= form_tag survey_page_workflow_user_index_path(story_id: @story.slug, page_position: params[:page_position]), method: :put, class: 'form-vertical' do %>
   <% @page.tasks.each do |task| %>
-    <% result = @results[task.id] %>
+    <% result = @results[task.id.to_s] %>
     
     <%= hidden_field_tag "results[#{task.id}][id]", result.id if result %>
     
-    <div class="form-group string required page_name <%= (@errors[task.id] ? 'has-error' : '') %>">
+    <div class="form-group string required <%= (@errors[task.id.to_s] ? 'has-error' : '') %>">
       <label class="string required control-label control-label">
         <%= task.name %>
       </label>
@@ -33,14 +33,35 @@
         <%= text_field_tag "results[#{task.id}][text]", result.try(:text), class: 'required form-control' %>
     <% elsif task.answer_type == 'Long text' %>
         <%= text_area_tag "results[#{task.id}][text]", result.try(:text), class: 'required form-control' %>
+    <% elsif task.answer_type == 'Multiple choice' %>
+      <% task.options.each do |option| %>
+        <% value = option.key? ? option.key : option.value %>
+        <input type="radio" name="results[<%=task.id %>][text]" 
+               value="<%= value %>"<% if result.try(:text) == value %> checked="checked"<% end %>/>&nbsp;&nbsp;<%= option.value %><br/>
+      <% end %>
+    <% elsif task.answer_type == 'Checkboxes' %>
+      <% task.options.each do |option| %>
+        <% value = option.key? ? option.key : option.value %>
+        <% input = result.try(:text).present? && result.text != 'null' ? JSON.parse(result.text) : [] %>
+        <input type="checkbox" name="results[<%=task.id %>][text][]" 
+               value="<%= value %>"<% if input.include? value %> checked="checked"<% end %>/>&nbsp;&nbsp;<%= option.value %><br/>
+      <% end %>
+    <% elsif task.answer_type == 'Drop-down list' %>
+      <select name="results[<%=task.id %>][text]">
+      <% task.options.each do |option| %>
+        <% value = option.key? ? option.key : option.value %>
+        <option value="<%= value %>"<% if result.try(:text) == value %> selected="selected"<% end %>><%= option.value %></option>
+      <% end %>
+      </select>
     <% end %>
       </p>
       
-    <% if @errors[task.id] %>
-      <% @errors[task.id].each do |message| %>
+    <% if @errors[task.id.to_s] %>
+      <% @errors[task.id.to_s].each do |message| %>
         <span class="help-block"><%= message %></span>
       <% end %>
     <% end %>  
+    </div>
   <% end %>
 
   <%= submit_tag t('general.submit'), class: 'btn btn-default' %>

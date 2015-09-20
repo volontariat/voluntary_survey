@@ -9,27 +9,40 @@ class Workflow::User::SurveyPagesController < ApplicationController
   def update
     @story = Story.find(params[:story_id])
     @page = @story.pages.where(position: params[:page_position]).first
-    @errors = {}
+    tasks = {}
+    tasks2 = Product::Survey::Task.where(id: { '$in' => @page.tasks.map(&:id) })
+    tasks2.each {|task| tasks[task.id.to_s] = task }
     
+    results = Product::Survey::Result.where(task_id: { '$in' => @page.tasks.map(&:id) }, user_id: current_user.id)
+    @results = {}
+    results.each{|result| @results[result.task_id.to_s] = result } 
+    @errors = {}
+
     params[:results].each do |task_id, result_form|
-      result = if result_form['id'].present?
-        Product::Survey::Result.find result_form.delete('id')
+      result = if result_form['id'].present? && @results[task_id].try(:user_id) == current_user.id
+        @results[task_id]
       else
-        nil
+        value = Product::Survey::Result.new(task_id: task_id)
+        value.user_id = current_user.id
+        value
       end
       
-      unless result.try(:user_id) == current_user.id
-        result = Product::Survey::Result.new(task_id: task_id)
-        result.user_id = current_user.id
-      end
+      text = tasks[task_id].answer_type == 'Checkboxes' ? result_form['text'].to_json : result_form['text']
       
-      result.update_attributes result_form
+      result.update_attributes text: text
       
       unless result.valid?
         @errors[task_id] ||= []
         
         result.errors.full_messages.each {|message| @errors[task_id] << message }
       end
+    end
+    
+    tasks.each do |task_id, task|
+      next if params[:results].has_key? task_id
+      
+      @errors[task_id] ||= []
+      @errors[task_id] << I18n.t('errors.messages.blank')
     end
     
     if @errors.empty?
