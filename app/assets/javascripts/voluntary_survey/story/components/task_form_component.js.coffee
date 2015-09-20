@@ -40,11 +40,16 @@ Volontariat.Survey.StoryApp.TaskFormComponent = Ember.Component.extend
         if data.errors
           alert "#{Volontariat.t('survey_tasks.save.failed')}: #{JSON.stringify(data.errors)}"
         else
-          @set 'id', data.task.id.$oid
-          @sendAction 'reloadAction'
-          @sendAction 'editPageAction', @get('pageId')
-          @sendAction 'editAction', data.task.id.$oid
-          alert Volontariat.t('survey_tasks.save.successful')
+          if @get('id')
+            @sendAction 'editAction', null
+          else
+            @sendAction 'addTaskAction', data.survey_task
+            
+            if @get('answerWithOptions')
+              @sendAction 'editAction', data.survey_task.id.$oid
+            else
+              @sendAction 'editAction', null
+          
       ).fail((data) =>
         alert "#{Volontariat.t('survey_tasks.save.failed')}!"
       )

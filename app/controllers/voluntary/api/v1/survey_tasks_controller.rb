@@ -22,7 +22,7 @@ class Voluntary::Api::V1::SurveyTasksController < ActionController::Base
     
     respond_to do |format|
       format.json do
-        render json: resource.persisted? ? resource : { errors: resource.errors.to_hash }
+        render json: resource.persisted? ? SurveyTaskSerializer.new(resource) : { errors: resource.errors.to_hash }
       end
     end
   end

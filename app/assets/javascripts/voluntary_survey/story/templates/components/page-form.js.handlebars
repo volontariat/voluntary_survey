@@ -36,7 +36,7 @@
       {{/each}}
       
       {{#if newTask}}
-        {{task-form pageId=id position=tasks.length answerType='Short text' options=[] editAction='editTask' editPageAction='editPage' reloadAction='reload'}}
+        {{task-form pageId=id position=tasks.length answerType='Short text' options=[] addTaskAction='addTask' editAction='editTask' editPageAction='editPage' reloadAction='reload'}}
       {{else}}
         <button {{action 'addNewTask'}} style="margin-top:15px;">
           <span class="glyphicon glyphicon-plus"></span> {{t 'survey_tasks.new.title' }}

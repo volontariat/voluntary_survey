@@ -30,6 +30,11 @@ Volontariat.Survey.StoryApp.PageFormComponent = Ember.Component.extend
       ).fail((data) =>
         alert "#{Volontariat.t('survey_pages.save.failed')}!"
       )
+     
+    addTask: (task) ->
+      tasks = @get('tasks')
+      tasks.pushObject task
+      @set 'tasks', tasks
       
     destroy:  ->
       if confirm(Volontariat.t('survey_pages.destroy.confirmation'))
