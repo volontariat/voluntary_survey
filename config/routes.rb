@@ -15,4 +15,8 @@ Rails.application.routes.draw do
       resources :survey_input_options, only: [:create, :show, :update, :destroy]
     end
   end
+  
+  resources :stories, only: [:create, :show, :edit, :update, :destroy] do
+    resources :results, only: [:index], controller: 'survey_results'
+  end
 end
