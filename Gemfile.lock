@@ -107,7 +107,7 @@ GIT
 PATH
   remote: .
   specs:
-    voluntary_survey (0.0.1)
+    voluntary_survey (0.1.0)
       voluntary (~> 0.5.2)
       voluntary-ember_js (~> 0.0.3)
 

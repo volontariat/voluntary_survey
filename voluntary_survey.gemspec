@@ -10,7 +10,7 @@ Gem::Specification.new do |s|
   s.authors     = ['Mathias Gawlista']
   s.email       = ['gawlista@gmail.com']
   s.homepage    = 'http://Volontari.at'
-  s.summary     = 'Plugin for crowdsourcing management system voluntary about surveys.'
+  s.summary     = 'Plugin about surveys for crowdsourcing management system voluntary.software.'
   s.description = 'Surveys plugin for #crowdsourcing gem voluntary: http://bit.ly/vs-0-1-0'
   s.license     = 'MIT'
 
