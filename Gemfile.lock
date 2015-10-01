@@ -109,7 +109,7 @@ PATH
   remote: .
   specs:
     voluntary_survey (0.1.1)
-      voluntary (~> 0.6.0)
+      voluntary (~> 0.6)
       voluntary-ember_js (~> 0.0.4)
 
 GEM
