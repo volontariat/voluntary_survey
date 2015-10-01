@@ -1,5 +1,9 @@
 ## unreleased ##
 
+## 0.1.1 (October 1, 2015) ##
+
+* Sets minimum version of voluntary gem to 0.6.0 and voluntary-ember_js gem to 0.0.4.
+
 ## 0.1.0 (October 1, 2015) ##
 
 * [#18](https://github.com/volontariat/voluntary_survey/issues/18) Results Analysis Page

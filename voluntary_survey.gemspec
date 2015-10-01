@@ -11,13 +11,13 @@ Gem::Specification.new do |s|
   s.email       = ['gawlista@gmail.com']
   s.homepage    = 'http://Volontari.at'
   s.summary     = 'Plugin about surveys for crowdsourcing management system voluntary.software.'
-  s.description = 'Surveys plugin for #crowdsourcing gem voluntary: http://bit.ly/vs-0-1-0'
+  s.description = 'Surveys plugin for #crowdsourcing gem voluntary: http://bit.ly/vsy-0-1-1'
   s.license     = 'MIT'
 
   s.files = Dir['{app,config,db,lib}/**/*', 'MIT-LICENSE', 'Rakefile', 'README.rdoc']
 
-  s.add_dependency 'voluntary', '~> 0.5.2'
-  s.add_dependency 'voluntary-ember_js', '~> 0.0.3'
+  s.add_dependency 'voluntary', '~> 0.6.0'
+  s.add_dependency 'voluntary-ember_js', '~> 0.0.4'
 
   # group :development
   
