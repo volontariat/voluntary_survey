@@ -8,6 +8,7 @@ class Product::Survey::InputOption
   
   field :key, type: String
   field :value, type: String
+  field :chosen_count, type: Integer
   
   orderable
   

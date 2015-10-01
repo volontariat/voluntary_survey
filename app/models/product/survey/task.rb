@@ -14,6 +14,10 @@ class Product::Survey::Task < ::Task
   orderable
   
   attr_accessible :position, :answer_type
+  
+  def with_options?
+    ['Multiple choice', 'Checkboxes', 'Drop-down list'].include? answer_type
+  end
 
   protected
   

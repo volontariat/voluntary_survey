@@ -1,0 +1,54 @@
+<% @story.pages.each do |page| %>
+  <fieldset class="fieldset" style="border: 1px solid black; padding:15px; margin-top:15px;">
+    <legend>
+      <% if page.name.present? %>
+        <%= page.name %></h3>
+      <% else %>
+        <%= t('activerecord.models.survey_page_short') %> <%= page.position %>
+      <% end %>
+    </legend>
+    
+    <% page.tasks.each do |task| %>
+      <h3 style="margin-top:0px;"><%= task.name %></h3>
+      
+      <% if ['Short text', 'Long text'].include? task.answer_type %>
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th><% t('general.author')%></th> 
+              <th><% t('attributes.text')%></th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @results[task.id.to_s].each do |result| %>
+              <tr>
+                <td><%= link_to result.user.name, user_path(result.user) %></td>
+                <td class="more"><%= result.text %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+        
+        <%= will_paginate @results[task.id.to_s], param_name: "result_#{task.id}_page" %>
+      <% elsif task.with_options? %>
+        <table class="table table-striped">
+          <tbody>
+            <% results_count = task.results.count %>
+            
+            <% task.options.order_by(chosen_count: 'desc').each do |option| %>
+              <tr>
+                <td><%= option.value %></td>
+                <td style="text-align:right;"><%= option.chosen_count.to_i %></td>
+                <td style="text-align:right;"><%= option.chosen_count.to_i > 0 && results_count > 0 ? (option.chosen_count / results_count) * 100 : 0 %> %</td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      <% end %>
+    <% end %>
+  </fieldset>
+<% end %>
+
+<% content_for :document_ready do %>
+  toggleText();
+<% end %>

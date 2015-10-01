@@ -35,22 +35,19 @@
         <%= text_area_tag "results[#{task.id}][text]", result.try(:text), class: 'required form-control' %>
     <% elsif task.answer_type == 'Multiple choice' %>
       <% task.options.each do |option| %>
-        <% value = option.key? ? option.key : option.value %>
         <input type="radio" name="results[<%=task.id %>][text]" 
-               value="<%= value %>"<% if result.try(:text) == value %> checked="checked"<% end %>/>&nbsp;&nbsp;<%= option.value %><br/>
+               value="<%= option.id.to_s %>"<% if result.try(:text) == option.id.to_s %> checked="checked"<% end %>/>&nbsp;&nbsp;<%= option.value %><br/>
       <% end %>
     <% elsif task.answer_type == 'Checkboxes' %>
       <% task.options.each do |option| %>
-        <% value = option.key? ? option.key : option.value %>
         <% input = result.try(:text).present? && result.text != 'null' ? JSON.parse(result.text) : [] %>
         <input type="checkbox" name="results[<%=task.id %>][text][]" 
-               value="<%= value %>"<% if input.include? value %> checked="checked"<% end %>/>&nbsp;&nbsp;<%= option.value %><br/>
+               value="<%= option.id.to_s %>"<% if input.include? option.id.to_s %> checked="checked"<% end %>/>&nbsp;&nbsp;<%= option.value %><br/>
       <% end %>
     <% elsif task.answer_type == 'Drop-down list' %>
       <select name="results[<%=task.id %>][text]">
       <% task.options.each do |option| %>
-        <% value = option.key? ? option.key : option.value %>
-        <option value="<%= value %>"<% if result.try(:text) == value %> selected="selected"<% end %>><%= option.value %></option>
+        <option value="<%= option.id.to_s %>"<% if result.try(:text) == option.id.to_s %> selected="selected"<% end %>><%= option.value %></option>
       <% end %>
       </select>
     <% end %>
