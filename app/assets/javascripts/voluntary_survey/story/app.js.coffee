@@ -1,5 +1,4 @@
 #= require_tree ./adapters
-#= require_tree ./mixins
 #= require_tree ./controllers
 #= require_tree ./models
 #= require ./router.js.coffee
