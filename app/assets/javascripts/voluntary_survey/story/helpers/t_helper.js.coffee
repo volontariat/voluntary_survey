@@ -1,4 +1,6 @@
-Ember.Handlebars.helper 't', (key, no_html, options) ->
+Volontariat.Survey.StoryApp.THelper = Ember.Helper.helper((params) ->
+  key = params[0]
+  no_html = params[1]
   text = Volontariat.t key
   
   if text == undefined
@@ -8,3 +10,4 @@ Ember.Handlebars.helper 't', (key, no_html, options) ->
       new (Ember.Handlebars.SafeString)('<span class="translation_missing" title="translation missing: ' + Volontariat.locale + '.' + key + '">' + key + '</span>')
   else
     text
+)

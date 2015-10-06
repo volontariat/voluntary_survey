@@ -17,7 +17,7 @@ Gem::Specification.new do |s|
   s.files = Dir['{app,config,db,lib}/**/*', 'MIT-LICENSE', 'Rakefile', 'README.rdoc']
 
   s.add_dependency 'voluntary', '~> 0.6'
-  s.add_dependency 'voluntary-ember_js', '~> 0.0.4'
+  s.add_dependency 'voluntary-ember_js', '~> 0.1.0'
 
   # group :development
   

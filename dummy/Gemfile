@@ -2,8 +2,8 @@ source 'https://rubygems.org'
 
 gemspec path: File.expand_path(File.dirname(__FILE__) + "/../")
 
-gem 'voluntary', path: '../../voluntary'#github: 'volontariat/voluntary'
-gem 'voluntary-ember_js', path: '../../voluntary-ember_js'#github: 'volontariat/voluntary-ember_js'
+gem 'voluntary', github: 'volontariat/voluntary'
+gem 'voluntary-ember_js', github: 'volontariat/voluntary-ember_js'
 
 # core
 gem 'rack-cors', '~> 0.2.4', require: 'rack/cors'
