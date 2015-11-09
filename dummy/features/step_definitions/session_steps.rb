@@ -7,7 +7,7 @@ end
 When /^I (?:sign|log) in as "([^"]*)"$/ do |name|
   @me = User.find_by_name(name)
   @me.password = 'password'
-  automatic_login
+  manual_login
   step %(I should see "Signed in successfully.")
 end
 
